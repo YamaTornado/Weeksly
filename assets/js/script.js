@@ -1,4 +1,4 @@
-const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
+const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 function renderWeek(targetId, suffix = "") {
   const container = document.getElementById(targetId);
@@ -9,7 +9,7 @@ function renderWeek(targetId, suffix = "") {
 
     const date = new Date();
     date.setDate(date.getDate() + startOffset + index);
-    const dateStr = date.toLocaleDateString("de-DE", {
+    const dateStr = date.toLocaleDateString("en-GB", {
       day: "2-digit",
       month: "2-digit"
     });
@@ -59,19 +59,19 @@ function createEntry(title, desc, targetDayId, status = "open") {
 
   const btn = document.createElement("button");
   btn.className = "status";
-  btn.textContent = (status === "done") ? "Erfüllt" : "Nicht erfüllt";
+  btn.textContent = (status === "done") ? "Done" : "Not done";
   if (status === "done") btn.classList.add("done");
 
   btn.addEventListener("click", () => {
     btn.classList.toggle("done");
-    btn.textContent = btn.classList.contains("done") ? "Erfüllt" : "Nicht erfüllt";
+    btn.textContent = btn.classList.contains("done") ? "Done" : "Not done";
     saveEntries(targetDayId);
   });
 
   const del = document.createElement("span");
   del.className = "material-icons delete";
   del.textContent = "delete";
-  del.title = "Löschen";
+  del.title = "Delete";
   del.onclick = () => {
     entry.remove();
     saveEntries(targetDayId);
@@ -90,10 +90,10 @@ function createEntry(title, desc, targetDayId, status = "open") {
 }
 
 function addEntry(targetDayId) {
-  const title = prompt("Titel des Blocks:");
+  const title = prompt("Title of the task:");
   if (!title) return;
 
-  const desc = prompt("Kurzer Text:");
+  const desc = prompt("Short description:");
   if (!desc) return;
 
   createEntry(title, desc, targetDayId);
@@ -119,6 +119,6 @@ function loadEntries(dayId) {
   entries.forEach(e => createEntry(e.title, e.desc, dayId, e.status));
 }
 
-// Rendern & laden
+// Render weeks
 renderWeek("week_current");
 renderWeek("week_next", "_next");
