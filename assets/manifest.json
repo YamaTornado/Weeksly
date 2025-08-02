@@ -3,8 +3,8 @@
   "display": "standalone",
   "theme_color": "#0d0d0d",
   "background_color": "#0d0d0d",
-  "name": "YamaPlanner",
-  "short_name": "Planner",
+  "name": "Planly",
+  "short_name": "Planly",
   "icons": [
     {
       "src": "/assets/icons/icon-192.png",
