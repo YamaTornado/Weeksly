@@ -158,7 +158,7 @@ function addEntry(targetDayId) {
 
     <div>
       <label for="time-input">Time (optional)</label>
-      <input id="time-input" class="entry-time" type="time">
+      <input id="time-input" class="entry-time" type="time" value="00:00">
     </div>
 
     <button class="save">Save entry</button>
@@ -169,10 +169,13 @@ function addEntry(targetDayId) {
   form.querySelector(".save").onclick = () => {
     const title = form.querySelector(".entry-title").value.trim();
     const desc = form.querySelector(".entry-desc").value.trim();
-    const time = form.querySelector(".entry-time").value.trim();
+    const timeInput = form.querySelector(".entry-time");
+    const time = timeInput.value.trim();
+    const timeUsed = time !== "00:00" ? time : "";
+
     if (!title || !desc) return;
 
-    createEntry(title, desc, targetDayId, "open", time);
+    createEntry(title, desc, targetDayId, "open", timeUsed);
     saveEntries(targetDayId);
     overlay.remove();
   };
@@ -205,6 +208,6 @@ function loadEntries(dayId) {
   entries.forEach(e => createEntry(e.title, e.desc, dayId, e.status, e.time));
 }
 
-// Render beide Wochen
+// Render both weeks
 renderWeek("week_current", 0);
 renderWeek("week_next", 1);
