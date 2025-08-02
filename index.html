@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Log in</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+
+  <!-- iOS Web App Setup -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="YamaPlanner">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Homescreen Icon -->
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+
+  <!-- Web App Manifest (für Android + Zukunft) -->
+  <link rel="manifest" href="/assets/manifest.json">
+</head>
+
+<body>
+  <section id="one">
+    <h1>Log in</h1>
+    <form id="loginForm" onsubmit="return prüfeAnmeldung()">
+      <div class="input-container">
+        <input type="text" id="benutzernameEingabe" name="username" placeholder="Username" required />
+        <input type="password" id="passwortEingabe" name="password" placeholder="Password" required />
+      </div>
+      <button id="loginButton" type="submit">Log in</button>
+    </form>
+    <p id="ergebnisText"></p>
+  </section>
+
+  <footer>
+    Version: <span id="version">0.0.1 | Alpha</span>
+  </footer>
+
+  <script>
+    function prüfeAnmeldung() {
+      const user = document.getElementById("benutzernameEingabe").value.trim();
+      const pw = document.getElementById("passwortEingabe").value.trim();
+
+      const benutzerListe = {
+        "Yama": "geheim",
+        "Test": "test123"
+      };
+
+      if (benutzerListe[user] && benutzerListe[user] === pw) {
+        window.location.href = "/main.html";
+        return false;
+      } else {
+        const msg = document.getElementById("ergebnisText");
+        msg.textContent = "❌ Incorrect username or password!";
+        msg.style.color = "red";
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

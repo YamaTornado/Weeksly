@@ -1,0 +1,108 @@
+/* === GENERAL === */
+html, body {
+  background-color: #0b0b0b;
+  color: #ffffff;
+  font-family: "JetBrains Mono", monospace;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* verhindert Scrollen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* === TITLE === */
+#one h1 {
+  font-weight: 600;
+  font-size: 2.4rem;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* === FORM === */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background-color: #111111;
+  padding: 40px 48px;
+  border: 1px solid #222;
+  width: 400px;
+  max-width: 90vw;
+  box-sizing: border-box;
+}
+
+/* === INPUTS === */
+.input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-container input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #444;
+  padding: 12px;
+  color: #ffffff;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.input-container input:focus {
+  outline: none;
+  border-bottom: 1px solid #ffffff;
+}
+
+/* === BUTTON === */
+#loginButton {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#loginButton:hover {
+  background-color: #cccccc;
+}
+
+/* === ERROR MESSAGE === */
+#ergebnisText {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #ff4444;
+  text-align: center;
+}
+
+/* === VERSION === */
+footer {
+  position: absolute;
+  bottom: 10px;
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+.settings-link {
+  font-size: 0.8rem;
+  color: #555;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.2s ease-in-out;
+}
+
+.settings-link:hover {
+  color: #aaa;
+}
