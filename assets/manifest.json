@@ -1,6 +1,6 @@
 {
-  "name": "Weeklys",
-  "short_name": "Weeklys",
+  "name": "Weeksly",
+  "short_name": "Weeksly",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
