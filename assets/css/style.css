@@ -63,6 +63,12 @@ h1 {
   font-size: 16px;
 }
 
+.past-day h3,
+.past-day .date {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
 .entry {
   background-color: #1a1a1a;
   border: 1px solid #333;
@@ -169,4 +175,153 @@ footer {
   user-select: none;
   margin: 1.4em 0 0.4em;
   letter-spacing: 1.2px;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  gap: 10px;
+}
+
+.drag-handle {
+  display: grid;
+  grid-template-columns: repeat(2, 4px);
+  grid-template-rows: repeat(3, 4px);
+  gap: 4px;
+  margin-right: 8px;
+  margin-left: 4px;
+  align-self: center;
+  cursor: grab;
+  width: 12px;
+  height: 24px;
+}
+
+.drag-handle span {
+  width: 4px;
+  height: 4px;
+  background-color: #888;
+  border-radius: 50%;
+}
+
+.content-wrap {
+  flex: 1;
+}
+
+.entry-time {
+  margin-left: auto;
+  font-size: 0.85em;
+  color: #aaa;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.entry-form {
+  background: #1c1c1c;
+  border-radius: 10px;
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #fff;
+}
+
+.entry-form label {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  display: block;
+  color: #ccc;
+}
+
+.entry-form input,
+.entry-form textarea {
+  background: #2b2b2b;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.entry-form textarea {
+  resize: none;
+  height: 70px;
+}
+
+.entry-form button.save {
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.entry-form button.save:hover {
+  background-color: #555;
+}
+
+.entry-form .close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-family: 'Material Icons';
+  font-size: 22px;
+  color: #999;
+  cursor: pointer;
+  user-select: none;
+}
+
+.entry-form .close:hover {
+  color: #fff;
+}
+
+.entry-form input[type="time"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #2b2b2b;
+  color: #fff;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  text-align: left;
+}
+
+.entry-form input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.entry-form input[type="time"]:hover::-webkit-calendar-picker-indicator {
+  opacity: 0.9;
 }
