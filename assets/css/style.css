@@ -154,3 +154,19 @@ footer {
   text-align: center;
   padding: 10px 0;
 }
+
+.planly-gradient {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.7rem;
+  font-weight: 600;
+  text-align: center;
+  text-shadow:
+    0 0 1px rgba(255, 79, 216, 0.25),
+    0 0 2px rgba(139, 59, 255, 0.15);
+  background: linear-gradient(90deg, #FF4FD8, #8B3BFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  user-select: none;
+  margin: 1.4em 0 0.4em;
+  letter-spacing: 1.2px;
+}
