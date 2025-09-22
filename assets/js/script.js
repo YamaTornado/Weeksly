@@ -294,3 +294,5 @@ function scheduleMidnightRefresh() {
 renderWeek("week_current", 0);
 renderWeek("week_next", 1);
 scheduleMidnightRefresh();
+
+//test
