@@ -266,3 +266,31 @@ function loadEntries(dayId) {
 // -------- Init: render current + next week --------
 renderWeek("week_current", 0);
 renderWeek("week_next", 1);
+
+
+// --- Neu: Auto-Refresh um Mitternacht ---
+function renderAllWeeks() {
+  const cur = document.getElementById("week_current");
+  const nxt = document.getElementById("week_next");
+  if (cur) cur.innerHTML = "";
+  if (nxt) nxt.innerHTML = "";
+  renderWeek("week_current", 0);
+  renderWeek("week_next", 1);
+}
+
+// ruft genau um die nächste Mitternacht neu
+function scheduleMidnightRefresh() {
+  const now = new Date();
+  const next = new Date(now);
+  next.setHours(24, 0, 0, 0); // nächste Mitternacht lokal
+  const ms = next.getTime() - now.getTime();
+  setTimeout(() => {
+    renderAllWeeks();          // einmal neu zeichnen
+    setInterval(renderAllWeeks, 24 * 60 * 60 * 1000); // dann täglich
+  }, ms);
+}
+
+// nach deinem ersten renderWeek-Aufruf starten:
+renderWeek("week_current", 0);
+renderWeek("week_next", 1);
+scheduleMidnightRefresh();
