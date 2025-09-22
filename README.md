@@ -1,1 +1,1 @@
-# Wochen-planer
+# Weeksly
