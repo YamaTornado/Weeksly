@@ -325,3 +325,51 @@ footer {
 .entry-form input[type="time"]:hover::-webkit-calendar-picker-indicator {
   opacity: 0.9;
 }
+
+/* Tages-Container (Planner) */
+.day {
+  position: relative;
+  padding-left: 12px;       /* Platz für die grüne Leiste */
+  background: #111;         /* optional, passt zu deinem Theme */
+  border: 1px solid #191919;
+  margin-bottom: 10px;
+}
+
+/* Grüner vertikaler Strich für HEUTE */
+.day.is-today::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 2px;
+  background: #26a269;
+}
+
+/* leichte Hinterlegung (optional) */
+.day.is-today {
+  background: rgba(38,162,105,0.06);
+}
+
+/* Basis-Header für Tage (falls noch nicht vorhanden) */
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+}
+
+.title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.day-header h3 { margin: 0; font-size: 1rem; }
+.day-header .date { font-size: 0.9rem; color: #bbb; }
+
+/* Plus-Button */
+.day-header > button {
+  background: #1f1f1f; border: 1px solid #2a2a2a; color:#fff;
+  padding: 4px 10px; cursor: pointer;
+}
+.day-header > button:hover { background:#2a2a2a; }

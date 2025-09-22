@@ -106,3 +106,65 @@ footer {
 .settings-link:hover {
   color: #aaa;
 }
+
+/* Tages-Container vorbereiten (falls noch nicht vorhanden) */
+.day {
+  position: relative;
+  padding-left: 12px;          /* Platz für die Leiste */
+  border: 1px solid #191919;   /* optional, fügt leichte Kanten hinzu */
+  margin-bottom: 10px;         /* optischer Abstand zwischen Tagen */
+  background: #111;            /* dunkler Kasten-Look, passt zu deinem Theme */
+}
+
+/* schlanke grüne Leiste links für "Heute" */
+.day.is-today::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 2px;
+  background: #26a269; /* gut lesbares Grün */
+}
+
+/* optional: ganz leichte Hinterlegung, damit es noch besser auffällt */
+.day.is-today {
+  background: rgba(38, 162, 105, 0.06);
+}
+
+/* Header minimal ausrichten (falls noch nicht gestylt) */
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+}
+
+.title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.day-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.day-header .date {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+/* Plus-Button optisch neutral */
+.day-header > button {
+  background: #1f1f1f;
+  border: 1px solid #2a2a2a;
+  color: #fff;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.day-header > button:hover {
+  background: #2a2a2a;
+}
