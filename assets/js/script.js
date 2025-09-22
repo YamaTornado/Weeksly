@@ -1,3 +1,6 @@
+// =========================
+// Weeksly – planner logic
+// =========================
 
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
@@ -26,9 +29,13 @@ function getMonday(offset = 0) {
 // -------- Rendering --------
 function renderWeek(targetId, offset = 0) {
   const container = document.getElementById(targetId);
+  if (!container) return;
+
+  // wichtig: vorher leeren, sonst doppelte Wochen
+  container.innerHTML = "";
+
   const monday = getMonday(offset);
   const isCurrentWeek = offset === 0;
-
   const todayIso = toISODate(startOfDay(new Date()));
 
   for (let i = 0; i < 7; i++) {
@@ -45,7 +52,7 @@ function renderWeek(targetId, offset = 0) {
     dayDiv.id = dayId;
     dayDiv.dataset.date = isoKey;
 
-    // Mark "today" visually (green vertical bar via CSS)
+    // Mark "today" (grüner Balken via CSS .day.is-today::before)
     if (isoKey === todayIso) {
       dayDiv.classList.add("is-today");
       dayDiv.setAttribute("aria-current", "date");
@@ -62,7 +69,7 @@ function renderWeek(targetId, offset = 0) {
     const title = document.createElement("h3");
     title.textContent = days[i];
 
-    // Optional: strike-through for past days of the current week
+    // Optional: Past-days strike-through innerhalb der aktuellen Woche
     if (isCurrentWeek && isoKey < todayIso) {
       title.style.textDecoration = "line-through";
     }
@@ -83,19 +90,18 @@ function renderWeek(targetId, offset = 0) {
     dayDiv.appendChild(header);
     container.appendChild(dayDiv);
 
-    // Load stored entries for this date
+    // existierende Einträge laden
     loadEntries(dayId);
 
-    // Enable drag & drop within AND across days
+    // Drag & Drop (auch zwischen Tagen)
     new Sortable(dayDiv, {
-      group: "week", // cross-day dragging
+      group: "week",
       animation: 150,
       handle: ".drag-handle",
       ghostClass: "ghost",
       onEnd: (evt) => {
         const fromId = evt.from.id;
         const toId = evt.to.id;
-        // Save both source and target columns
         saveEntries(fromId);
         if (fromId !== toId) saveEntries(toId);
       }
@@ -172,7 +178,7 @@ function createEntry(title, desc, targetDayId, status = "open", time = "") {
 }
 
 function addEntry(targetDayId) {
-  // close any existing modal
+  // bestehendes Modal schließen
   const existingOverlay = document.querySelector(".overlay");
   if (existingOverlay) existingOverlay.remove();
 
@@ -217,11 +223,9 @@ function addEntry(targetDayId) {
     overlay.remove();
   };
 
-  window.addEventListener(
-    "keydown",
-    (e) => { if (e.key === "Escape") overlay.remove(); },
-    { once: true }
-  );
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") overlay.remove();
+  }, { once: true });
 
   overlay.appendChild(form);
   document.body.appendChild(overlay);
@@ -263,36 +267,25 @@ function loadEntries(dayId) {
   }
 }
 
-// -------- Init: render current + next week --------
-renderWeek("week_current", 0);
-renderWeek("week_next", 1);
-
-
-// --- Neu: Auto-Refresh um Mitternacht ---
+// -------- Helpers: render both weeks + midnight refresh --------
 function renderAllWeeks() {
-  const cur = document.getElementById("week_current");
-  const nxt = document.getElementById("week_next");
-  if (cur) cur.innerHTML = "";
-  if (nxt) nxt.innerHTML = "";
   renderWeek("week_current", 0);
   renderWeek("week_next", 1);
 }
 
-// ruft genau um die nächste Mitternacht neu
 function scheduleMidnightRefresh() {
   const now = new Date();
   const next = new Date(now);
   next.setHours(24, 0, 0, 0); // nächste Mitternacht lokal
   const ms = next.getTime() - now.getTime();
   setTimeout(() => {
-    renderAllWeeks();          // einmal neu zeichnen
+    renderAllWeeks(); // einmal neu zeichnen
     setInterval(renderAllWeeks, 24 * 60 * 60 * 1000); // dann täglich
   }, ms);
 }
 
-// nach deinem ersten renderWeek-Aufruf starten:
-renderWeek("week_current", 0);
-renderWeek("week_next", 1);
-scheduleMidnightRefresh();
-
-//test
+// -------- Init (einmalig) --------
+document.addEventListener("DOMContentLoaded", () => {
+  renderAllWeeks();
+  scheduleMidnightRefresh();
+});
